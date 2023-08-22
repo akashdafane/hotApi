@@ -1,4 +1,5 @@
 // const express = require('express')
+require("dotenv").config();
 const connectDB = require("./db/conn");
 
 // const product_routes = require("./routes/product");
@@ -31,11 +32,11 @@ app.use(bodyParser.json());
 app.use("/user", UserRoute);
 app.use("/api", ProductRoute);
 // Replace 'your_database_url' with your actual MongoDB connection URL
-const DB_URL = "mongodb://127.0.0.1:27017/student"; // Example URL
+// const DB_URL = "mongodb://127.0.0.1:27017/student"; // Example URL
 
 const start = async () => {
   try {
-    await connectDB(DB_URL);
+    await connectDB(process.env.MONGODB_URL);
     app.listen(PORT, () => {
       console.log(`Server is listening on port ${PORT}`);
     });
